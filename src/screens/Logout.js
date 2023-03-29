@@ -13,7 +13,7 @@ export default function Logout() {
                 <TouchableOpacity
                 onPress={() => navigation.navigate("Login")}
                 >
-                    <Text style={{ backgroundColor: 'black', padding: 10, marginVertical: 10, color: 'white', fontFamily: "RobotoMono-Italic" }}>Logout</Text>
+                    <Text style={{ backgroundColor: 'black', padding: 10, marginVertical: 10, color: 'white', fontFamily: "RobotoMono-Regular" }}>Logout</Text>
                 </TouchableOpacity>
             </View>
         </>
@@ -23,6 +23,6 @@ export default function Logout() {
 const styles = StyleSheet.create({
     fontStyle:{
         color: 'black',
-        fontFamily: 'RobotoMono-Italic',
+        fontFamily: 'RobotoMono-Regular',
     }
 })
