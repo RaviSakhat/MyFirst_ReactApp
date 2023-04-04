@@ -12,58 +12,39 @@ import ShowPass from 'react-native-vector-icons/Ionicons'
 import { useNavigation } from '@react-navigation/native';
 import BackgroundImage from '../../assets/img/bg.jpg'
 import SocialIcons from 'react-native-vector-icons/Ionicons'
+import { signUpStyle } from './signUpPage/SignUpStyle';
+import axios from 'axios';
+
 
 
 export default function Login() {
 
     const navigation = useNavigation();
-    const [inputBox, setInputBox] = useState("");
-    const [userValue, setUserValue] = useState([]);
     const [enteringPass, setenteringPass] = useState(false);
-    const [showPass, setshowPass] = useState(false)
+    const [showPass, setshowPass] = useState(false);
+    const [inputBox, setInputBox] = useState({
+        userEmail: '',
+        // userName: '',
+        Password: '',
+    });
 
-    useEffect(() => {
-        async function tempFunction() {
-            await getItemList();
-        }
-        tempFunction();
-        return () => {
-        };
-    }, [])
-
-
-    const addItemToList = async () => {
-        // try {
-        //     userValue.push(inputBox);
-        //     console.log('userValue', userValue)
-        //     const output = JSON.stringify(userValue);
-        //     await AsyncStorage.setItem("itemList", output)
-        //     console.log('output', output)
-        //     setInputBox('');
-        // } catch (error) {
-        //     console.log('error', error)
-        // }
-        // navigation.navigate("HomeScreen")
-    }
-
-    const getItemList = async () => {
-        try {
-            const userData = await AsyncStorage.getItem("itemList");
-            const getOutput = JSON.parse(userData);
-            setUserValue(getOutput);
-        } catch (error) {
-            console.log('error', error)
-        }
-        // navigation.navigate("HomeScreen")
-    }
-
-    const onHandleDelete = async () => {
-        await AsyncStorage.clear();
-        setUserValue([]);
-    }
+    const [error, setError] = useState("");
 
     const onShowPass = () => {
         setshowPass(!showPass);
+    }
+
+    const onHandleLogin = () => {
+        if (!inputBox.userEmail || !inputBox.Password) {
+            setError("Please fill all the details");
+            return;
+        } else {
+            axios.post('http://localhost:3000/signin', {
+                userEmail: inputBox.userEmail,
+                Password: inputBox.Password
+            }).then(res => console.log('res', res)).catch(err => console.log('err', err))
+        }
+        navigation.navigate("DrawerNavigator")
     }
 
     return (
@@ -76,56 +57,44 @@ export default function Login() {
                             <View style={LogInPageStyle.inputBoxContainer}>
                                 <Email name='mail' size={20} style={{ marginHorizontal: 10 }} />
                                 <TextInput
-                                    value={inputBox}
                                     placeholder="Please enter your email"
                                     placeholderTextColor={'black'}
-                                    onChangeText={(value) => setInputBox(value)} />
+                                    onChangeText={(value) => setInputBox({ ...inputBox, userEmail: value })} onPressIn={() => setError(null)} />
                             </View>
-                            <View style={LogInPageStyle.inputBoxContainer}>
+                            {/* <View style={LogInPageStyle.inputBoxContainer}>
                                 <User name='person' size={20} style={{ marginHorizontal: 10 }} />
                                 <TextInput
-                                    value={inputBox}
                                     placeholder="Please enter your name"
                                     placeholderTextColor={'black'}
-                                    onChangeText={(value) => setInputBox(value)} />
-                            </View>
+                                    onChangeText={(value) => setInputBox({ ...inputBox, userName: value })} />
+                            </View> */}
                             <View style={LogInPageStyle.inputBoxContainer}>
                                 {
                                     <LockClose name={enteringPass ? 'lock-open' : 'lock-closed'} size={20} style={{ marginHorizontal: 10 }} />
                                 }
                                 <TextInput
-                                    value={inputBox}
                                     placeholder="Please enter your password"
                                     placeholderTextColor={'black'}
                                     secureTextEntry={showPass ? false : true}
-                                    onChangeText={(value) => setInputBox(value)}
+                                    onChangeText={(value) => setInputBox({ ...inputBox, Password: value })}
                                     //how to change icon when you entering the input field value
                                     onFocus={() => setenteringPass(false)}
                                     onBlur={() => setenteringPass(true)}
+                                    onPressIn={() => setError(null)}
                                 />
                                 <ShowPass name={showPass ? 'eye' : 'eye-off'} style={{ marginHorizontal: 70, marginTop: 2 }} size={20} onPress={() => onShowPass()} />
                             </View>
-                            {/* <Text style={{fontFamily: "RobotoMono-VariableFont_wght"}}>HomeScreen</Text> */}
                             <View style={LogInPageStyle.forgotPasswordText}>
-                                <Text>Forgot Your Password? <Text style={{fontWeight: 'bold'}} onPress={() => navigation.navigate("ForgotPassword")}>Click Here</Text></Text>
+                                <Text>Forgot Your Password? <Text style={{ fontWeight: 'bold' }} onPress={() => navigation.navigate("ForgotPassword")}>Click Here</Text></Text>
                             </View>
                             <View style={LogInPageStyle.buttonView}>
-                                <TouchableOpacity  style={LogInPageStyle.loginButton} onPress={() => navigation.navigate("DrawerNavigator")}>
+                                {
+                                    error ? <Text style={signUpStyle.signUpError}>{error}</Text> : null
+                                }
+                                <TouchableOpacity style={LogInPageStyle.loginButton} onPress={() => onHandleLogin()}>
                                     <Text style={LogInPageStyle.loginButton} >Login</Text>
                                 </TouchableOpacity>
-                                {/* <TouchableOpacity>
-                            <Text style={LogInPageStyle.addButton} onPress={() => onHandleDelete()}>Delete</Text>
-                        </TouchableOpacity> */}
                             </View>
-                            {/* <ScrollView>
-                        {
-                            userValue?.map((item, index) => {
-                                return (
-                                    <Text>{item}</Text>
-                                    )
-                                })
-                            }
-                        </ScrollView> */}
                         </ScrollView>
                         <View style={LogInPageStyle.orTextView}>
                             <Text style={LogInPageStyle.orTextStyle}>Or</Text>
@@ -134,11 +103,11 @@ export default function Login() {
                     </View>
                     <View style={LogInPageStyle.SignUpContainer}>
                         <View>
-                                <Text style={LogInPageStyle.signUpText}>New User SignUp?</Text>            
+                            <Text style={LogInPageStyle.signUpText}>New User SignUp?</Text>
                         </View>
                         <View style={LogInPageStyle.signUpButton}>
                             <TouchableOpacity onPress={() => addItemToList()} style={LogInPageStyle.loginButton} >
-                                <Text style={LogInPageStyle.SignUpButtnText} onPress={()=> navigation.navigate("SignUp")}>Sign Up</Text>
+                                <Text style={LogInPageStyle.SignUpButtnText} onPress={() => navigation.navigate("SignUp")}>Sign Up</Text>
                             </TouchableOpacity>
                         </View>
                     </View>

@@ -29,12 +29,13 @@ const signUpStyle = StyleSheet.create({
         marginHorizontal: 145,
         borderRadius: 20,
         borderColor: 'black',
-        borderWidth: 1.5
+        borderWidth: 1.5,
+        marginBottom: 10
     },
     signUpText: {
         color: 'black',
         textAlign: 'center',
-        fontWeight: 'bold'
+        fontWeight: 'bold',
     },
     loginOptionContainer: {
         alignItems: 'center'
@@ -42,6 +43,11 @@ const signUpStyle = StyleSheet.create({
     loginText: {
         color: 'black',
         fontWeight: 'bold'
+    },
+    signUpError: {
+        color: 'red',
+        textAlign: 'center',
+        padding: 10,
     }
 })
 
