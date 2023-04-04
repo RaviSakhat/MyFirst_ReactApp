@@ -8,17 +8,66 @@ import BackgroundImage from '../../../assets/img/bgSignUp.jpg';
 import { ScrollView } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native'
 import ShowPass from 'react-native-vector-icons/Ionicons'
+import axios from 'axios';
+import { Toast } from 'toastify-react-native';
 
 export default function SignUp() {
 
   const navigation = useNavigation();
 
   const [enteringPass, setEnteringPass] = useState(false)
-  const [showPass, setShowPass] = useState(false)
+  const [showPass, setShowPass] = useState(false);
+  const [userData, setUserData] = useState({
+    userName: '',
+    userEmail: '',
+    Password: '',
+    confirmPassword: ''
+  })
+
+  const [error, setError] = useState("");
 
   const onShowPass = () => {
     setShowPass(!showPass);
-}
+  }
+
+  const sendToBackEnd = () => {
+    if (!userData.userName ||
+      !userData.userEmail ||
+      !userData.Password ||
+      !userData.confirmPassword) {
+      setError("Please fill all the details")
+      return;
+    } else {
+      if (userData.Password != userData.confirmPassword) {
+        setError("Password and confirm Password must be the same");
+        return;
+      } else {
+        axios.post('http://localhost:3000/signup', {
+          userName: userData.userName,
+          userEmail: userData.userEmail,
+          Password: userData.Password,
+          confirmPassword: userData.confirmPassword
+        }).then(res => console.log('res', res))
+        .catch(err => console.log('err', err))
+      }}
+    //     fetch('http://192.168.29.42:3000/signup',{
+    //         method: 'POST',
+    //         headers: {
+    //           'Content-Type': 'application/json'
+    //         },
+    //         body: JSON.stringify(userData)
+    //     })
+    //     .then(res => res.json()).then(data => {
+    //       console.log('data====>', data)
+    //     })
+    //   }
+    // }
+
+    // console.log('userData', userData)
+    alert("User created successfully")
+    // Toast.success("User created successfully");
+    navigation.navigate("Login");
+  }
 
   return (
     <View>
@@ -27,32 +76,51 @@ export default function SignUp() {
           <Text style={signUpStyle.topHeader}>Register</Text>
           <View style={signUpStyle.inputBox}>
             <User name='person' size={20} style={{ marginHorizontal: 10 }} />
-            <TextInput placeholder='Username' placeholderTextColor='black' />
+            <TextInput placeholder='Username' placeholderTextColor='black' onChangeText={(text) => setUserData({
+              ...userData, userName
+                : text
+            })} onPressIn={() => setError(null)} />
           </View>
           <View style={signUpStyle.inputBox}>
             <Email name='mail' size={20} style={{ marginHorizontal: 10 }} />
-            <TextInput placeholder='Email' placeholderTextColor='black' />
+            <TextInput placeholder='Email' placeholderTextColor='black' onChangeText={(text) => setUserData({
+              ...userData, userEmail
+                : text
+            })} onPressIn={() => setError(null)} />
           </View>
           <View style={signUpStyle.inputBox}>
             <LockClose name='lock-closed' size={20} style={{ marginHorizontal: 10 }} />
-            <TextInput placeholder='Password' placeholderTextColor='black' />
-            <ShowPass name={showPass ? 'eye' : 'eye-off'} style={{ marginHorizontal: 185, marginRight: 1, marginTop: 2,}} size={18} onPress={() => onShowPass()} />
+            <TextInput placeholder='Password' placeholderTextColor='black' secureTextEntry={showPass ? false : true} onChangeText={(text) => setUserData({
+              ...userData, Password
+                : text
+            })} onPressIn={() => setError(null)} />
+            <ShowPass name={showPass ? 'eye' : 'eye-off'} style={{ marginHorizontal: 185, marginRight: 1, marginTop: 2, }} size={18} onPress={() => onShowPass()} />
           </View>
           <View style={signUpStyle.inputBox}>
             {
               <LockClose name={enteringPass ? 'lock-open' : 'lock-closed'} size={20} style={{ marginHorizontal: 10 }} />
             }
-            <TextInput placeholder='Confirm Password' placeholderTextColor='black' onFocus={() => setEnteringPass(false)} onBlur={() => setEnteringPass(true)} />
+            <TextInput placeholder='Confirm Password' placeholderTextColor='black' onFocus={() => setEnteringPass(false)} onBlur={() => setEnteringPass(true)} onChangeText={(text) => setUserData({
+              ...userData, confirmPassword
+                : text
+            })} onPressIn={() => setError(null)} secureTextEntry={showPass ? false : true}/>
             <ShowPass name={showPass ? 'eye' : 'eye-off'} style={{ marginHorizontal: 130, marginTop: 2 }} size={18} onPress={() => onShowPass()} />
           </View>
+          {
+            error ? <Text style={signUpStyle.signUpError}>{error}</Text> : null
+          }
           <TouchableOpacity>
-            <View style={signUpStyle.signUpContainer}>
-              <Text style={signUpStyle.signUpText}>SignUp
-              </Text>
+            <View style={signUpStyle.signUpContainer} >
+              <TouchableOpacity onPress={() => sendToBackEnd()}>
+                <Text style={signUpStyle.signUpText}>SignUp
+                </Text>
+              </TouchableOpacity>
             </View>
           </TouchableOpacity>
-          <View style={signUpStyle.loginOptionContainer}> 
-            <Text style={signUpStyle.loginOptionText}>Have an account? <Text style={signUpStyle.loginText} onPress={() => navigation.navigate("Login")}>Login</Text></Text>
+          <View style={signUpStyle.loginOptionContainer}>
+            <TouchableOpacity>
+              <Text style={signUpStyle.loginOptionText}>Have an account? <Text style={signUpStyle.loginText} onPress={() => navigation.navigate("Login")}>Login</Text></Text>
+            </TouchableOpacity>
           </View>
         </ScrollView>
       </ImageBackground>
