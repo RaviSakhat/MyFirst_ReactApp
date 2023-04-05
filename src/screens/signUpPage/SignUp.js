@@ -42,12 +42,12 @@ export default function SignUp() {
         setError("Password and confirm Password must be the same");
         return;
       } else {
-        axios.post('http://localhost:3000/signup', {
+        axios.post('http://localhost:3000/verify', {
           userName: userData.userName,
           userEmail: userData.userEmail,
           Password: userData.Password,
           confirmPassword: userData.confirmPassword
-        }).then(res => console.log('res', res))
+        }).then(res => console.log('res', res.data))
         .catch(err => console.log('err', err))
       }}
     //     fetch('http://192.168.29.42:3000/signup',{
@@ -64,9 +64,8 @@ export default function SignUp() {
     // }
 
     // console.log('userData', userData)
-    alert("User created successfully")
     // Toast.success("User created successfully");
-    navigation.navigate("Login");
+    navigation.navigate("Verification", userData);
   }
 
   return (

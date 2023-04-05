@@ -48,6 +48,25 @@ const signUpStyle = StyleSheet.create({
         color: 'red',
         textAlign: 'center',
         padding: 10,
+    },
+    VerificationText: {
+        marginTop: 100,
+        textAlign: 'center',
+        fontSize: 20
+    },
+    VerificationButton: {
+        alignItems: 'center',
+        marginTop: 50,
+        padding: 10,
+        marginHorizontal: 145,
+        borderRadius: 20,
+        borderColor: 'black',
+        borderWidth: 1.5,
+    },
+    VerificationButtonText: {
+        textAlign: 'center',
+        color: 'black',
+        fontWeight: 'bold',
     }
 })
 
