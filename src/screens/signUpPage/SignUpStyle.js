@@ -6,7 +6,7 @@ const signUpStyle = StyleSheet.create({
     topHeader:{
         textAlign: 'center',
         fontSize: 40,
-        marginTop: 130,
+        marginTop: 90,
         marginHorizontal: 25,
     },
     inputBox: {
@@ -17,7 +17,6 @@ const signUpStyle = StyleSheet.create({
         marginTop: 10,
         borderRadius: 20,
         paddingHorizontal: 10,
-        paddingVertical: 10,
         overflow: 'hidden',
         flex: 1,
     },

@@ -42,14 +42,16 @@ export default function SignUp() {
         setError("Password and confirm Password must be the same");
         return;
       } else {
-        axios.post('http://localhost:3000/verify', {
+        axios.post('http://10.0.0.2:3000/signup', {
           userName: userData.userName,
           userEmail: userData.userEmail,
           Password: userData.Password,
           confirmPassword: userData.confirmPassword
-        }).then(res => console.log('res', res.data))
-        .catch(err => console.log('err', err))
-      }}
+        }).then(res => navigation.navigate("Verification", { userdata: res.data.userdata }))
+
+          .catch(err => console.log('err', err))
+      }
+    }
     //     fetch('http://192.168.29.42:3000/signup',{
     //         method: 'POST',
     //         headers: {
@@ -65,7 +67,6 @@ export default function SignUp() {
 
     // console.log('userData', userData)
     // Toast.success("User created successfully");
-    navigation.navigate("Verification", userData);
   }
 
   return (
@@ -74,36 +75,36 @@ export default function SignUp() {
         <ScrollView>
           <Text style={signUpStyle.topHeader}>Register</Text>
           <View style={signUpStyle.inputBox}>
-            <User name='person' size={20} style={{ marginHorizontal: 10 }} />
-            <TextInput placeholder='Username' placeholderTextColor='black' onChangeText={(text) => setUserData({
+            <User name='person' size={20} style={{ marginHorizontal: 10, paddingVertical: 15, color: 'black' }} />
+            <TextInput style={{color: 'black'}} placeholder='Username' placeholderTextColor='black' onChangeText={(text) => setUserData({
               ...userData, userName
                 : text
             })} onPressIn={() => setError(null)} />
           </View>
           <View style={signUpStyle.inputBox}>
-            <Email name='mail' size={20} style={{ marginHorizontal: 10 }} />
-            <TextInput placeholder='Email' placeholderTextColor='black' onChangeText={(text) => setUserData({
+            <Email name='mail' size={20} style={{ marginHorizontal: 10, paddingVertical: 15, color: 'black' }} />
+            <TextInput placeholder='Email' placeholderTextColor='black' style={{color: 'black'}} onChangeText={(text) => setUserData({
               ...userData, userEmail
                 : text
             })} onPressIn={() => setError(null)} />
           </View>
           <View style={signUpStyle.inputBox}>
-            <LockClose name='lock-closed' size={20} style={{ marginHorizontal: 10 }} />
-            <TextInput placeholder='Password' placeholderTextColor='black' secureTextEntry={showPass ? false : true} onChangeText={(text) => setUserData({
+            <LockClose name='lock-closed' size={20} style={{ marginHorizontal: 10, paddingVertical: 15, color: 'black' }} />
+            <TextInput placeholder='Password' placeholderTextColor='black' style={{color: 'black'}} secureTextEntry={showPass ? false : true} onChangeText={(text) => setUserData({
               ...userData, Password
                 : text
             })} onPressIn={() => setError(null)} />
-            <ShowPass name={showPass ? 'eye' : 'eye-off'} style={{ marginHorizontal: 185, marginRight: 1, marginTop: 2, }} size={18} onPress={() => onShowPass()} />
+            <ShowPass name={showPass ? 'eye' : 'eye-off'} style={{ marginHorizontal: 185, marginRight: 1, marginTop: 2, paddingVertical: 15, color: 'black' }} size={18} onPress={() => onShowPass()} />
           </View>
           <View style={signUpStyle.inputBox}>
             {
-              <LockClose name={enteringPass ? 'lock-open' : 'lock-closed'} size={20} style={{ marginHorizontal: 10 }} />
+              <LockClose name={enteringPass ? 'lock-open' : 'lock-closed'} size={20} style={{ marginHorizontal: 10, paddingVertical: 15, color: 'black' }} />
             }
-            <TextInput placeholder='Confirm Password' placeholderTextColor='black' onFocus={() => setEnteringPass(false)} onBlur={() => setEnteringPass(true)} onChangeText={(text) => setUserData({
+            <TextInput placeholder='Confirm Password' placeholderTextColor='black' style={{color: 'black'}} onFocus={() => setEnteringPass(false)} onBlur={() => setEnteringPass(true)} onChangeText={(text) => setUserData({
               ...userData, confirmPassword
                 : text
-            })} onPressIn={() => setError(null)} secureTextEntry={showPass ? false : true}/>
-            <ShowPass name={showPass ? 'eye' : 'eye-off'} style={{ marginHorizontal: 130, marginTop: 2 }} size={18} onPress={() => onShowPass()} />
+            })} onPressIn={() => setError(null)} secureTextEntry={showPass ? false : true} />
+            <ShowPass name={showPass ? 'eye' : 'eye-off'} style={{ marginHorizontal: 115, marginTop: 2, paddingVertical: 15,color: 'black' }} size={18} onPress={() => onShowPass()} />
           </View>
           {
             error ? <Text style={signUpStyle.signUpError}>{error}</Text> : null
