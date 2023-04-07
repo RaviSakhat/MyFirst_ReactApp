@@ -1,18 +1,31 @@
 import { View, Text, ImageBackground, TouchableOpacity } from 'react-native'
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import backGroundImage from '../../../assets/img/VerificationBg.jpg'
 import { ScrollView } from 'react-native-gesture-handler';
 import CodeInput from 'react-native-confirmation-code-input';
 import { signUpStyle } from './SignUpStyle';
+import axios from 'axios';
 
-export default function Verification() {
+export default function Verification({navigation, route}) {
 
-  // const { userData } = route.params;
+  const { userdata } = route.params;
+  console.log('userdata', userdata.verificationCode);
 
-  // console.log('userdata', userData?.verificationCode)
+  // const [actualCode, setActualCode] = useState("");
+  const [userCode, setUserCode] = useState("");
+  const [verificationError, setVerificationError] = useState("");
 
+  useEffect(() => {
+    let code = userdata.verificationCode
+    console.log('code', code)
+    setUserCode(code)
+  }, [userdata])
+  
   const onCodeAdded = (code) => {
-    console.log(code)
+    if(code === userCode){
+      alert("User created Successfully")
+      navigation.navigate("Login")
+    }
   }
 
   return (
@@ -26,13 +39,12 @@ export default function Verification() {
             keyboardType="numeric"
             codeLength={6}
             className='border-circle'
-            compareWithCode='123456'
+            compareWithCode={userCode}
             autoFocus={false}
             codeInputStyle={{ fontWeight: '800' }}
             onFulfill={(isValid, code) => onCodeAdded(code)}
           />
-          <View>
-
+          {/* <View>
             <TouchableOpacity>
               <View style={signUpStyle.VerificationButton} >
                 <Text style={signUpStyle.VerificationButtonText}>SignUp
@@ -47,7 +59,7 @@ export default function Verification() {
                 </TouchableOpacity>
               </View>
             </TouchableOpacity>
-          </View>
+          </View> */}
         </ScrollView>
       </ImageBackground>
     </View>
