@@ -22,7 +22,7 @@ export default function StackNavigator() {
         <Stack.Screen name='DrawerNavigator' component={DrawerNavigator} options={{ headerShown: false }} />
         <Stack.Screen name='HomeScreen' component={HomeScreen} options={{ headerShown: true }} />
         <Stack.Screen name='TopTabNavigator' component={TopTabNavigator} options={{ headerShown: false }} />
-        <Stack.Screen name='BottomNavigator' component={BottomNavigator} options={{headerShown: true}}></Stack.Screen>
+        <Stack.Screen name='BottomNavigator' component={BottomNavigator} options={{headerShown: false}}></Stack.Screen>
         <Stack.Screen name='ForgotPassword' component={ForgotPassword} options={{headerShown: true}}></Stack.Screen>
         <Stack.Screen name='Verification' component={Verification} options={{headerShown: true}}></Stack.Screen>
       </Stack.Navigator>

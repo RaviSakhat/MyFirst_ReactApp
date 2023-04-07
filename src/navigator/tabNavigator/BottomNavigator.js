@@ -3,7 +3,7 @@ import React from 'react'
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import HomeScreen from '../../screens/HomeScreen';
 import Settings from '../../screens/Settings';
-import Profile from '../../screens/Profile';
+import Profile from '../../screens/Profile/Profile';
 import IonicIcons from "react-native-vector-icons/Ionicons"
 
 
