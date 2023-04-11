@@ -1,6 +1,4 @@
-
-import React from 'react'
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Login from '../../screens/Login';
 import SignUp from '../../screens/signUpPage/SignUp';
@@ -10,6 +8,8 @@ import HomeScreen from '../../screens/HomeScreen';
 import BottomNavigator from '../tabNavigator/BottomNavigator';
 import ForgotPassword from '../../screens/ForgotPassword';
 import Verification from '../../screens/signUpPage/Verification';
+import VideoCall from '../../screens/videoCall/VideoCall';
+import EnterCallingId from '../../screens/entercallingid/EnterCallingId';
 
 const Stack = createNativeStackNavigator();
 
@@ -25,6 +25,8 @@ export default function StackNavigator() {
         <Stack.Screen name='BottomNavigator' component={BottomNavigator} options={{headerShown: false}}></Stack.Screen>
         <Stack.Screen name='ForgotPassword' component={ForgotPassword} options={{headerShown: true}}></Stack.Screen>
         <Stack.Screen name='Verification' component={Verification} options={{headerShown: true}}></Stack.Screen>
+        <Stack.Screen name='VideoCallPage' component={VideoCall} options={{headerShown: false}}></Stack.Screen>
+        <Stack.Screen name='EnterCallingId' component={EnterCallingId} options={{headerShown: false}}></Stack.Screen>
       </Stack.Navigator>
     </NavigationContainer>
   )
