@@ -5,6 +5,7 @@ import Chats from '../../screens/Chats';
 import BottomNavigator from '../tabNavigator/BottomNavigator';
 import Logout from '../../screens/Logout';
 import TopTabNavigator from '../topTabNavigator/TopTabNavigator';
+import Calculator from '../../screens/calculator/Calculator';
 
 const Drawer = createDrawerNavigator();
 
@@ -16,6 +17,7 @@ export default function DrawerNavigator() {
             <Drawer.Screen name="Chats" component={Chats} />
             <Drawer.Screen name="Logout" component={Logout}/>
             <Drawer.Screen name="TopTabNavigator" component={TopTabNavigator}/>
+            <Drawer.Screen name="Calculator" component={Calculator}/>
         </Drawer.Navigator>
     )
 }

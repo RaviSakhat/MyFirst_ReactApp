@@ -18,7 +18,7 @@ const profileStyle = StyleSheet.create({
     callIconContainer: {
         marginTop: 70,
         // backgroundColor: 'yellow',
-        marginLeft: 65,
+        marginLeft: 43,
         width: 50,
         height: 50,
         borderRadius: 100,
@@ -73,15 +73,16 @@ const profileStyle = StyleSheet.create({
         marginBottom: 100
     },
     firstSection: {
-        // backgroundColor: 'yellow',
-        padding: 30,
+        marginTop: 10,
+        // backgroundColor: 'blue',
+        // padding: 30,
         marginBottom: 20,
         justifyContent: 'center',
         flexDirection: 'row',
         // borderColor: 'black',
-        // borderRadius: 150,
-        // borderWidth: 2
-        
+        borderRadius: 10,
+        // borderWidth: 2,
+        marginRight: 3
     },
     socialMediaStatus: {
         paddingHorizontal: 20,
@@ -92,7 +93,13 @@ const profileStyle = StyleSheet.create({
         marginLeft: 5,
     },
     activeSocialMediaStatus: {
-        borderColor: 'black'
+        paddingHorizontal: 20,
+        paddingVertical: 10,
+        backgroundColor: '#4F4557',
+        borderColor: 'white',
+        borderRadius: 50,
+        borderWidth: 2,
+        marginLeft: 5,
     },
     secondSection: {
         backgroundColor: 'green',
@@ -107,4 +114,4 @@ const profileStyle = StyleSheet.create({
     }
 })
 
-export { profileStyle }
+export { profileStyle };
