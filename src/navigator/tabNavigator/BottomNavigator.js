@@ -12,12 +12,23 @@ const Tab = createMaterialBottomTabNavigator();
 export default function BottomNavigator() {
   return (
     <Tab.Navigator>
-      <Tab.Screen name="Home" component={HomeScreen} options={{ headerShown: false, tabBarIcon: () => <BottomIconsContainer name="home" />, tabBarColor: "black" }} />
-      <Tab.Screen name="Settings" component={Settings} options={{ headerShown: false, tabBarIcon: () => <BottomIconsContainer name="settings" />, tabBarColor: "Grey" }} />
-      <Tab.Screen name="Profile" component={Profile} options={{
-        headerShown: false, tabBarIcon: () =>
-          <BottomIconsContainer name="person-circle" />
-      }} />
+      <Tab.Screen
+        name="Home"
+        component={HomeScreen}
+        options={{ headerShown: true, tabBarIcon: () => <BottomIconsContainer name="home" />,
+        }} 
+        />
+      <Tab.Screen
+        name="Settings"
+        component={Settings} 
+        options={{ headerShown: false, tabBarIcon: () => <BottomIconsContainer name="settings" /> }} />
+      <Tab.Screen
+        name="Profile"
+        component={Profile} 
+        options={{
+          headerShown: false, tabBarIcon: () =>
+            <BottomIconsContainer name="person-circle" />
+        }} />
     </Tab.Navigator>
   )
 }
