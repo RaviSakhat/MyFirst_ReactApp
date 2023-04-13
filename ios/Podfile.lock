@@ -339,6 +339,11 @@ PODS:
     - RCTTypeSafety
     - React-Core
     - ReactCommon/turbomodule/core
+  - react-native-video (5.2.1):
+    - React-Core
+    - react-native-video/Video (= 5.2.1)
+  - react-native-video/Video (5.2.1):
+    - React-Core
   - react-native-webview (11.26.1):
     - React-Core
   - react-native-zego-express-engine (3.2.0):
@@ -480,7 +485,7 @@ PODS:
   - Yoga (1.14.0)
   - YogaKit (1.18.1):
     - Yoga (~> 1.14)
-  - zego-uikit-prebuilt-call-rn (3.0.0-beta.1):
+  - zego-uikit-prebuilt-call-rn (3.0.0-beta.3):
     - React-Core
   - ZegoExpressEngine (3.2.0):
     - ZegoExpressEngine/Video (= 3.2.0)
@@ -535,6 +540,7 @@ DEPENDENCIES:
   - react-native-document-picker (from `../node_modules/react-native-document-picker`)
   - react-native-pager-view (from `../node_modules/react-native-pager-view`)
   - react-native-safe-area-context (from `../node_modules/react-native-safe-area-context`)
+  - react-native-video (from `../node_modules/react-native-video`)
   - react-native-webview (from `../node_modules/react-native-webview`)
   - react-native-zego-express-engine (from `../node_modules/zego-express-engine-reactnative`)
   - React-perflogger (from `../node_modules/react-native/ReactCommon/reactperflogger`)
@@ -627,6 +633,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-pager-view"
   react-native-safe-area-context:
     :path: "../node_modules/react-native-safe-area-context"
+  react-native-video:
+    :path: "../node_modules/react-native-video"
   react-native-webview:
     :path: "../node_modules/react-native-webview"
   react-native-zego-express-engine:
@@ -715,6 +723,7 @@ SPEC CHECKSUMS:
   react-native-document-picker: 495c444c0c773c6e83a5d91165890ecb1c0a399a
   react-native-pager-view: 0ccb8bf60e2ebd38b1f3669fa3650ecce81db2df
   react-native-safe-area-context: 39c2d8be3328df5d437ac1700f4f3a4f75716acc
+  react-native-video: c26780b224543c62d5e1b2a7244a5cd1b50e8253
   react-native-webview: 9f111dfbcfc826084d6c507f569e5e03342ee1c1
   react-native-zego-express-engine: 47e48e9e647bc973827a04f0c09723a9f3421feb
   React-perflogger: 0bb0522a12e058f6eb69d888bc16f40c16c4b907
@@ -741,7 +750,7 @@ SPEC CHECKSUMS:
   SocketRocket: fccef3f9c5cedea1353a9ef6ada904fde10d6608
   Yoga: 79dd7410de6f8ad73a77c868d3d368843f0c93e0
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
-  zego-uikit-prebuilt-call-rn: 14bf792bc8be98cd040c60f4b61969c5c787aa88
+  zego-uikit-prebuilt-call-rn: 184cc79b935fc662dff3cb01ed25a36ef9b7735a
   ZegoExpressEngine: 7ddbd7134c03c45bfdcddb61f4d76a1486518425
 
 PODFILE CHECKSUM: 89bce97569fd3e0480d262cd6d58037270951210

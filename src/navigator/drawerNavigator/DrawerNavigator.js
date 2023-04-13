@@ -12,7 +12,7 @@ const Drawer = createDrawerNavigator();
 export default function DrawerNavigator() {
     return (
         <Drawer.Navigator>
-            <Drawer.Screen name='HomeScreen' component={BottomNavigator} options={{headerShown: true}}/>
+            <Drawer.Screen name='HomeScreen' component={BottomNavigator} options={{headerShown: false}}/>
             <Drawer.Screen name="DashBoard" component={DashBoard} />
             <Drawer.Screen name="Chats" component={Chats} />
             <Drawer.Screen name="Logout" component={Logout}/>

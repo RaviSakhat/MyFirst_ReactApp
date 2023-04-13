@@ -9,6 +9,8 @@ import com.facebook.react.defaults.DefaultNewArchitectureEntryPoint;
 import com.facebook.react.defaults.DefaultReactNativeHost;
 import com.facebook.soloader.SoLoader;
 import java.util.List;
+import com.facebook.react.bridge.JSIModulePackage; // <- add
+
 
 public class MainApplication extends Application implements ReactApplication {
 
